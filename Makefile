@@ -7,7 +7,7 @@ include config.mk
 SRC = st.c x.c
 OBJ = $(SRC:.c=.o)
 
-all: options st
+all: options st home-install
 
 options:
 	@echo st build options:
@@ -51,5 +51,8 @@ install: st
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
+	
+home-install:
+	cp -f st ${HOME}/bin/st
 
 .PHONY: all options clean dist install uninstall
