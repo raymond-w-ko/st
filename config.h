@@ -43,7 +43,7 @@ int allowaltscreen = 1;
 
 /* frames per second st should at maximum draw to the screen */
 unsigned int xfps = 120;
-unsigned int actionfps = 60;
+unsigned int actionfps = 30;
 
 /*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
