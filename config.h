@@ -150,7 +150,7 @@ unsigned int mousebg = 0;
  * Color used to display font attributes when fontconfig selected a font which
  * doesn't match the ones requested.
  */
-/* static unsigned int defaultattr = 11; */
+unsigned int defaultattr = 11;
 
 /*
  * Internal mouse shortcuts.
