@@ -20,8 +20,8 @@ LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft \
 
 # flags
 CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
-STCFLAGS = $(INCS) $(CPPFLAGS) $(CFLAGS)
-STLDFLAGS = $(LIBS) $(LDFLAGS)
+STCFLAGS = $(INCS) $(CPPFLAGS) $(CFLAGS) -Os -flto
+STLDFLAGS = $(LIBS) $(LDFLAGS) -flto
 
 # compiler and linker
 # CC = c99
