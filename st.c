@@ -135,9 +135,11 @@ static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
 static void printsel(const Arg *);
 static void printscreen(const Arg *) ;
-static void iso14755(const Arg *);
 static void toggleprinter(const Arg *);
 static void sendbreak(const Arg *);
+
+/* this function is in x.c */
+void iso14755(const Arg *);
 
 /* config.h for applying patches and the configuration. */
 #include "config.h"
@@ -1988,31 +1990,6 @@ tprinter(char *s, size_t len)
 		close(iofd);
 		iofd = -1;
 	}
-}
-
-void
-iso14755(const Arg *arg)
-{
-	unsigned long id = xwinid();
-	char cmd[sizeof(ISO14755CMD) + NUMMAXLEN(id)];
-	FILE *p;
-	char *us, *e, codepoint[9], uc[UTF_SIZ];
-	unsigned long utf32;
-
-	snprintf(cmd, sizeof(cmd), ISO14755CMD, id);
-	if (!(p = popen(cmd, "r")))
-		return;
-
-	us = fgets(codepoint, sizeof(codepoint), p);
-	pclose(p);
-
-	if (!us || *us == '\0' || *us == '-' || strlen(us) > 7)
-		return;
-	if ((utf32 = strtoul(us, &e, 16)) == ULONG_MAX ||
-	    (*e != '\n' && *e != '\0'))
-		return;
-
-	ttysend(uc, utf8encode(utf32, uc));
 }
 
 void

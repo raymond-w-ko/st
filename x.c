@@ -1521,6 +1521,20 @@ focus(XEvent *ev)
 	}
 }
 
+static int unicode_char_read_mode = 0;
+static int unicode_char_bytes_read = 0;
+#define unicode_char_buf_size 16
+static char unicode_char_buf[unicode_char_buf_size] = {0};
+
+void
+iso14755(const Arg* arg) {
+	unicode_char_read_mode = 1;
+	unicode_char_bytes_read = 0;
+	for (int i = 0; i < unicode_char_buf_size; ++i) {
+		unicode_char_buf[i] = '\0';
+	}
+}
+
 void
 kpress(XEvent *ev)
 {
@@ -1531,6 +1545,8 @@ kpress(XEvent *ev)
 	Rune c;
 	Status status;
 	Shortcut *bp;
+	unsigned long utf32;
+	char uc[UTF_SIZ];
 
 	if (IS_SET(MODE_KBDLOCK))
 		return;
@@ -1564,6 +1580,17 @@ kpress(XEvent *ev)
 			buf[0] = '\033';
 			len = 2;
 		}
+	}
+
+	if (unicode_char_read_mode && len == 1) {
+		unicode_char_buf[unicode_char_bytes_read] = buf[0];
+		unicode_char_bytes_read++;
+		if (unicode_char_bytes_read < 4)
+			return;
+		unicode_char_buf[4] = '\0';
+		utf32 = strtoul(unicode_char_buf, NULL, 16);
+		len = utf8encode(utf32, buf);
+		unicode_char_read_mode = 0;
 	}
 	ttysend(buf, len);
 }
