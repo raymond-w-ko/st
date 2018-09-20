@@ -53,7 +53,7 @@ install: st
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
-	
+
 home-install:
 	cp -f st ${HOME}/bin/st
 
