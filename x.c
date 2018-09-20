@@ -53,6 +53,7 @@ static void clipcopy(const Arg *);
 static void clippaste(const Arg *);
 static void numlock(const Arg *);
 static void selpaste(const Arg *);
+static void unicodemode(const Arg *);
 static void zoom(const Arg *);
 static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
@@ -1653,13 +1654,18 @@ static int unicode_char_read_mode = 0;
 static int unicode_char_bytes_read = 0;
 #define unicode_char_buf_size 16
 static char unicode_char_buf[unicode_char_buf_size] = {0};
-/*
+
+void
+unicodemode(const Arg *dummy)
+{
+	int i;
+
 	unicode_char_read_mode = 1;
 	unicode_char_bytes_read = 0;
-	for (int i = 0; i < unicode_char_buf_size; ++i) {
+	for (i = 0; i < unicode_char_buf_size; ++i) {
 		unicode_char_buf[i] = '\0';
 	}
-*/
+}
 
 int
 match(uint mask, uint state)
@@ -1715,7 +1721,6 @@ kpress(XEvent *ev)
 	Status status;
 	Shortcut *bp;
 	unsigned long utf32;
-	char uc[UTF_SIZ];
 
 	if (IS_SET(MODE_KBDLOCK))
 		return;
