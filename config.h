@@ -653,8 +653,8 @@ static const char *altcolorname[] = {
  */
 unsigned int defaultfg = 12;
 unsigned int defaultbg = 8;
-static unsigned int defaultcs = 14;
-static unsigned int defaultrcs = 15;
+static unsigned int defaultcs = 46;
+static unsigned int defaultrcs = 46;
 
 /*
  * Default shape of cursor
