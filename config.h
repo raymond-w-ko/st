@@ -8,9 +8,9 @@
 char font[] = "creep2:pixelsize=11:minspace=true";
 
 /* disable bold, italic and roman fonts globally */
-int disablebold = 1;
-int disableitalic = 1;
-int disableroman = 1;
+static int disablebold = 1;
+static int disableitalic = 1;
+static int disableroman = 1;
 
 static int borderpx = 2;
 
