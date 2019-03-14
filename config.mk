@@ -1,5 +1,5 @@
 # st version
-VERSION = 0.8.1
+VERSION = 0.8.2
 
 # Customize below to fit your system
 
@@ -21,8 +21,8 @@ LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft \
        `$(PKG_CONFIG) --libs freetype2`
 
 # flags
-CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
-STCFLAGS = $(INCS) $(CPPFLAGS) $(CFLAGS) -Os -flto
+STCPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
+STCFLAGS = $(INCS) $(STCPPFLAGS) $(CPPFLAGS) -Os -flto
 STLDFLAGS = $(LIBS) $(LDFLAGS) -flto
 
 # OpenBSD:
